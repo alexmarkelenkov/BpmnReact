@@ -1,6 +1,18 @@
 module.exports = {
-    entry: "./b.js",
+    entry: "./app/client.jsx",
     output: {
-        filename: "b.js"
+        filename: "bundle.js"
+    },
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                exclude: /(node_modules)/,
+                loader: "babel-loader",
+                options: {
+                    presets: ["env", "react"]
+                }
+            }
+        ]
     }
 }
