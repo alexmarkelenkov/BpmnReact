@@ -1,35 +1,50 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { Jumbotron, Grid, Row, Col, Image, Button } from 'react-bootstrap';
+import { Jumbotron, Grid, Button, Table } from 'react-bootstrap';
 import './Home.css';
 
-const Home = () => (
-    <Grid>
-        <Jumbotron>
-            <h2>Welcome to CodeLife</h2>
-            <p>This is how to build a website with React, React-Router & React-Bootstrap</p>
-            <Link to="/about">
-                <Button bsStyle="primary">Learn More</Button>
-            </Link>
-        </Jumbotron>
-        <Row className="show-grid text-center">
-            <Col xs={12} sm={4} className="person-wrapper">
-                <Image src="assets/person-1.jpg" circle className="profile-pic"/>
-                <h3>Frank</h3>
-                <p>That's a crooked tree. We'll send him to Washington. These little son of a guns hide in your brush and you just have to push them out.</p>
-            </Col>
-            <Col xs={12} sm={4} className="person-wrapper">
-                <Image src="assets/person-2.jpg" circle className="profile-pic"/>
-                <h3>Vanessa</h3>
-                <p>That's a crooked tree. We'll send him to Washington. These little son of a guns hide in your brush and you just have to push them out.</p>
-            </Col>
-            <Col xs={12} sm={4} className="person-wrapper">
-                <Image src="assets/person-3.jpg" circle className="profile-pic"/>
-                <h3>Riff</h3>
-                <p>That's a crooked tree. We'll send him to Washington. These little son of a guns hide in your brush and you just have to push them out.</p>
-            </Col>
-        </Row>
-    </Grid>
-);
-
+class Home extends Component{
+    render(){
+        return(
+            <Grid>
+                <Jumbotron>
+                    <h2>Welcome to BpmnJS</h2>
+                    <p>Here you can build your own bpmn diagrams and save them </p>
+                    <Link to="/about">
+                        <Button bsStyle="primary">Learn More</Button>
+                    </Link>
+                </Jumbotron>
+                <Table striped bordered condensed hover>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td colSpan="2">Larry the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    </tbody>
+                </Table>
+            </Grid>
+        );
+    }
+}
 export default Home;
