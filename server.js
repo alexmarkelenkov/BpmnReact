@@ -8,14 +8,6 @@ const conString = "postgres://postgres@localhost:5432/list";
 const client = new pg.Client(conString);
 client.connect();
 
-var query = client.query("SELECT * FROM diagrams", (err, res) => {
-    console.log(err ? err.stack : res.rows.map(row => row.id)) ;// Hello World!
-    client.end();
-});
-
-
-
-
 app.use(xmlparser());
 
 app.get('/', function (req, res) {
@@ -27,11 +19,21 @@ app.get('/dist/bundle.js', function(req, res) {
     res.sendFile("dist/bundle.js", {root: __dirname });
 });
 
+
 app.post('/new', function (req, res) {
-    console.log(req.headers);
-    console.log(req.body);
-    res.set('Content-Type', 'text/xml');
-    res.send(xml(req.body));
+    let query = client.query("INSERT INTO diagrams(diagram) values ($1) RETURNING id", [req.body])
+        .then(result => console.log(result.rows[0].id))
+        .catch(e => console.error(e.stack));
+    //console.log(query);
+    res.redirect('/#/');
+
+    //res.send(xml(req.body));
+});
+
+app.get('/all', (req, res) => {
+    let query = client.query("SELECT * FROM diagrams")
+        .then(result => console.log(result))
+        .catch(e => console.error(e.stack));
 });
 
 

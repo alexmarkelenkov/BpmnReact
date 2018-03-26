@@ -2,8 +2,15 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { Jumbotron, Grid, Button, Table } from 'react-bootstrap';
 import './Home.css';
+import $ from 'jquery';
 
 class Home extends Component{
+
+    constructor(){
+        super();
+        this.state = [];
+    }
+
     render(){
         return(
             <Grid>
@@ -14,7 +21,7 @@ class Home extends Component{
                         <Button bsStyle="primary">Learn More</Button>
                     </Link>
                 </Jumbotron>
-                <Table striped bordered condensed hover>
+                <Table striped bordered condensed hover className={"table-diagrams"}>
                     <thead>
                     <tr>
                         <th>#</th>
@@ -45,6 +52,23 @@ class Home extends Component{
                 </Table>
             </Grid>
         );
+    }
+
+    componentDidMount(){
+
+        let component = this;
+
+        $.get("/all", diagrams => {
+            component.setState([...diagrams]);
+        });
+
+    }
+
+    componentDidUpdate(){
+        this.state.map(diagram => {
+            let td = $("<tr><td>4</td><td>td 2</td><td>td 3</td></tr>");
+            $(".table-diagrams").append(td);
+        });
     }
 }
 export default Home;

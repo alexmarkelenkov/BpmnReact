@@ -10,7 +10,7 @@ const Main = () => (
         <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
-            <Route path="/new" component={New}/>
+            <Route path="/new" render={()=><New diagram="https://cdn.rawgit.com/bpmn-io/bpmn-js-examples/dfceecba/starter/diagram.bpmn"/>}/>
         </Switch>
     </div>
 );

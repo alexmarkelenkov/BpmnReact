@@ -5,10 +5,12 @@ import $ from 'jquery';
 
 class New extends Component{
 
-    constructor(){
+    constructor(props){
         super();
         this.viewer = new BpmnJS();
         this.generateId = 'bpmnContainer'+ Date.now();
+        this.diagram = props.diagram;
+        console.log(props);
     }
 
     render(){
@@ -28,10 +30,9 @@ class New extends Component{
         this.viewer.attachTo('#'+ this.generateId);
         $('#'+ this.generateId).css({"height": "700px"} );
 
-        // import function
+
         function importXML(xml,Viewer) {
 
-            // import diagram
             Viewer.importXML(xml, function(err) {
 
                 if (err) {
@@ -41,11 +42,8 @@ class New extends Component{
                 var canvas = Viewer.get('canvas'),
                     overlays = Viewer.get('overlays');
 
-
-                // zoom to fit full viewport
                 canvas.zoom('fit-viewport');
 
-                // attach an overlay to a node
                 overlays.add('SCAN_OK', 'note', {
                     position: {
                         bottom: 0,
@@ -54,7 +52,6 @@ class New extends Component{
                     html: '<div class="diagram-note">Mixed up the labels?</div>'
                 });
 
-                // add marker
                 canvas.addMarker('SCAN_OK', 'needs-discussion');
 
             });
@@ -73,17 +70,13 @@ class New extends Component{
                     url: "/new",
                     data: xml,
                     contentType: "text/xml",
-                    datatype: "xml",
-                    error: function() { alert("No data found."); },
-                    success: function(res) {
-
-                    }
+                    datatype: Number
                 });
             });
         }
 
 
-        let diagramUrl = 'https://cdn.rawgit.com/bpmn-io/bpmn-js-examples/dfceecba/starter/diagram.bpmn';
+        let diagramUrl = this.diagram;
         let viewer = this.viewer;
 
 
