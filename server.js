@@ -25,14 +25,14 @@ app.post('/new', function (req, res) {
         .then(result => console.log(result.rows[0].id))
         .catch(e => console.error(e.stack));
     //console.log(query);
-    res.redirect('/#/');
+    //res.redirect('/');
 
     //res.send(xml(req.body));
 });
 
 app.get('/all', (req, res) => {
     let query = client.query("SELECT * FROM diagrams")
-        .then(result => console.log(result))
+        .then(result => res.send(result.rows))
         .catch(e => console.error(e.stack));
 });
 
