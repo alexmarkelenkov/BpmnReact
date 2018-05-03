@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Jumbotron, Grid, Button, Table } from 'react-bootstrap';
 import './Home.css';
 import $ from 'jquery';
-import New from "../New/New";
+import New from "../New/New.jsx";
 
 class Home extends Component{
 
@@ -39,7 +39,19 @@ class Home extends Component{
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.diagrams.map(x => <tr><td>{x.id}</td><td>diagram{x.id}</td><td><Link to='/new'><Button bsStyle="primary"></Button></Link></td></tr>})
+                    {this.state.diagrams.map(x =>
+                        <tr>
+                            <td>{x.id}</td>
+                            <td>diagram{x.id}</td>
+                            <td>
+                                <Link to={`/new/${x.id}`}>
+                                    <Button bsStyle="primary">
+                                        Modify
+                                    </Button>
+                                </Link>
+                            </td>
+                        </tr>
+                    )}
                     </tbody>
                 </Table>
             </Grid>

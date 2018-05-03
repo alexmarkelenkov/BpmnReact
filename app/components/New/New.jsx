@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-
-
 import $ from 'jquery';
 
 class New extends Component{
@@ -10,7 +8,7 @@ class New extends Component{
         this.viewer = new BpmnJS();
         this.generateId = 'bpmnContainer'+ Date.now();
         this.diagram = props.diagram;
-        console.log(props);
+        //console.log(this.diagram);
     }
 
     render(){
@@ -39,7 +37,7 @@ class New extends Component{
                     return console.error('could not import BPMN 2.0 diagram', err);
                 }
 
-                var canvas = Viewer.get('canvas'),
+                let canvas = Viewer.get('canvas'),
                     overlays = Viewer.get('overlays');
 
                 canvas.zoom('fit-viewport');
@@ -63,14 +61,13 @@ class New extends Component{
                 if (err) {
                     return console.error('could not save BPMN 2.0 diagram', err);
                 }
-                alert('Diagram exported. Check the developer tools!');
+                //alert('Diagram exported. Check the developer tools!');
                 console.log('DIAGRAM', xml);
                 $.ajax({
                     type: "POST",
                     url: "/new",
                     data: xml,
-                    contentType: "text/xml",
-                    datatype: Number
+                    contentType: "text/xml"
                 });
             });
         }
